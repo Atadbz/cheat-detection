@@ -1,19 +1,19 @@
 # Webcam Cheating Detection
 
-Python prototypes that score possible cheating from a live webcam feed.
+Python prototypes for flagging possible cheating from a live webcam feed.
 
 <sub>ARCHIVED EXPERIMENT · 2024 · PYTHON · OPENCV · TENSORFLOW</sub>
 
 ## Overview
 
-The scripts try to flag possible cheating in a live webcam feed by combining several visual cues. An SSD MobileNet V2 detector from TensorFlow Hub counts people and finds phones or books, and an OpenCV Haar cascade checks face position. The dlib facial landmarks compare lip distance with a closed-lips calibration, and later versions score frames only while DeepFace matches the person to a reference image. A separate script estimates head pose with MediaPipe Face Mesh, and `src/cheat_detection.py` is the final version.
+Most scripts try to flag possible cheating in a live webcam feed by combining several visual cues. An SSD MobileNet V2 detector from TensorFlow Hub counts people and finds phones or books, and an OpenCV Haar cascade checks face position. The dlib facial landmarks compare lip distance with a closed-lips calibration, and later versions score frames only while DeepFace matches the person to a reference image. Two scripts differ: `03_face_verification.py` only checks identity, and `05_head_pose_estimation.py` uses head angles from MediaPipe Face Mesh alone.
 
 ## Contents
 
 | Path | Description |
 | --- | --- |
-| `experiments/` | Earlier standalone scripts, numbered in the order they were added. `01_first_attempt.py` and `02_second_attempt.py` combine object detection, face position and lip distance into a cheating percentage. The second only adds quieter TensorFlow logging. `03_face_verification.py` checks webcam frames against a reference image with DeepFace every 30 frames. `04_face_verification_with_scoring.py` computes the score only while the face matches. `05_head_pose_estimation.py` is a separate approach. It turns head angles from MediaPipe Face Mesh and `solvePnP` into a smoothed cheating probability with a live Matplotlib plot. |
-| `src/` | `cheat_detection.py`, the final version, which adds face verification to the scoring. A detected phone or book raises the score to its maximum. So does a face below or beside the frame center. Output is shown in an OpenCV window. |
+| `experiments/` | Earlier standalone scripts, numbered in the order they were added. `01_first_attempt.py` and `02_second_attempt.py` combine object detection, face position and lip distance into a cheating percentage. The second only adds quieter TensorFlow logging. `03_face_verification.py` checks webcam frames against a reference image with DeepFace every 30 frames and computes no score. `04_face_verification_with_scoring.py` computes the score only while the face matches. `05_head_pose_estimation.py` is a separate approach. It turns head angles from MediaPipe Face Mesh and `solvePnP` into an accumulating cheating probability with a live Matplotlib plot. |
+| `src/` | `cheat_detection.py`, the final version. It scores only while the face matches. A detected phone or book raises the score to its maximum. So does a face below or beside the frame center. Output is shown in an OpenCV window. |
 | `requirements.txt` | Python packages imported across all scripts, without pinned versions. |
 
 ## Usage
@@ -37,6 +37,6 @@ python experiments/05_head_pose_estimation.py
 
 ## Notes
 
-Archived experiment kept for reference. The scripts repeat most of their code, rely on hand-set weights and thresholds, and point to local model and image files that are not included. No evaluation data or results are part of the repository.
+Archived experiment kept for reference, and no evaluation data or results are part of the repository. Scripts 01, 02 and 04 and `src/cheat_detection.py` repeat most of their code. Every script except 03 uses hand-set weights and thresholds, and every script except 05 points to local model or image files that are not included.
 
 <sub>This repository follows the [Repository Standard](https://github.com/Atadbz/Atadbz/blob/main/REPOSITORY_STANDARD.md).</sub>
