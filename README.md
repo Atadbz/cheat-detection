@@ -12,13 +12,13 @@ Most scripts try to flag possible cheating in a live webcam feed by combining se
 
 | Path | Description |
 | --- | --- |
-| `experiments/` | Earlier standalone scripts, numbered in the order they were added. `01_first_attempt.py` and `02_second_attempt.py` combine object detection, face position and lip distance into a cheating percentage. The second only adds quieter TensorFlow logging. `03_face_verification.py` checks webcam frames against a reference image with DeepFace every 30 frames and computes no score. `04_face_verification_with_scoring.py` computes the score only while the face matches. `05_head_pose_estimation.py` is a separate approach. It turns head angles from MediaPipe Face Mesh and `solvePnP` into an accumulating cheating probability with a live Matplotlib plot. |
 | `src/` | `cheat_detection.py`, the final version. It scores only while the face matches. A detected phone or book raises the score to its maximum. So does a face below or beside the frame center. Output is shown in an OpenCV window. |
-| `requirements.txt` | Python packages imported across all scripts, without pinned versions. |
+| `experiments/` | Five earlier scripts, numbered in commit order. `01_first_attempt.py` and `02_second_attempt.py` combine object detection, face position, and lip distance into a cheating percentage. The second only adds quieter TensorFlow logging. `03_face_verification.py` checks webcam frames against a reference image with DeepFace every 30 frames and computes no score. `04_face_verification_with_scoring.py` computes the score only while the face matches. `05_head_pose_estimation.py` is a separate approach. It turns head angles from MediaPipe Face Mesh and `solvePnP` into an accumulating cheating probability with a live Matplotlib plot. |
+| `requirements.txt` | Third-party packages imported by the scripts, unpinned. |
 
 ## Usage
 
-`src/cheat_detection.py` needs a webcam, the dlib `shape_predictor_68_face_landmarks.dat` model and a reference face image. Neither the model nor the image is included. Both paths are hardcoded in the script and in the experiments that use them, so edit them before running. The SSD MobileNet V2 model is loaded from a TensorFlow Hub URL, so network access is needed at least on the first run.
+`src/cheat_detection.py` needs a webcam, the dlib `shape_predictor_68_face_landmarks.dat` model, and a reference face image. Neither the model nor the image is included. Both paths are hardcoded in the script and in the experiments that use them, so edit them before running. The SSD MobileNet V2 model is loaded from a TensorFlow Hub URL, so network access is needed at least on the first run.
 
 Install the dependencies:
 
@@ -37,6 +37,6 @@ python experiments/05_head_pose_estimation.py
 
 ## Notes
 
-Archived experiment kept for reference, and no evaluation data or results are part of the repository. Scripts 01, 02 and 04 and `src/cheat_detection.py` repeat most of their code. Every script except 03 uses hand-set weights and thresholds, and every script except 05 points to local model or image files that are not included.
+Archived experiment kept for reference. No evaluation data or results are included, and every script except 05 points to local model or image files that are not in the repository. Scripts 01, 02, and 04 share most of their code with `src/cheat_detection.py`, and every script except 03 uses hand-set weights and thresholds.
 
 <sub>This repository follows the [Repository Standard](https://github.com/Atadbz/Atadbz/blob/main/REPOSITORY_STANDARD.md).</sub>
