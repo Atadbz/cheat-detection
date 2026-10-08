@@ -2,7 +2,7 @@
 
 This repository holds Python prototypes that estimate how likely it is that the person in front of a webcam is cheating.
 
-<sub>ARCHIVED EXPERIMENT · 2025 · PYTHON · OPENCV · TENSORFLOW · DLIB · DEEPFACE · MEDIAPIPE</sub>
+<sub>ARCHIVED EXPERIMENT · 2025 · PYTHON · OPENCV · TENSORFLOW</sub>
 
 ## Overview
 
@@ -12,7 +12,7 @@ The scripts try to flag possible cheating from a live webcam feed by combining s
 
 | Path | Description |
 | --- | --- |
-| `experiments/` | Earlier standalone scripts, numbered in the order they were added. `01_first_attempt.py` and `02_second_attempt.py` combine object detection, face position and lip distance into a cheating percentage; the second only adds quieter TensorFlow logging. `03_face_verification.py` checks webcam frames against a reference image with DeepFace, and `04_face_verification_with_scoring.py` computes the score only while the face matches. `05_head_pose_estimation.py` is a separate approach that turns MediaPipe Face Mesh head angles into a smoothed cheating probability with a live Matplotlib plot. |
+| `experiments/` | Earlier standalone scripts, numbered in the order they were added. `01_first_attempt.py` and `02_second_attempt.py` combine object detection, face position and lip distance into a cheating percentage; the second only adds quieter TensorFlow logging. `03_face_verification.py` checks webcam frames against a reference image with DeepFace every 30 frames, and `04_face_verification_with_scoring.py` computes the score only while the face matches. `05_head_pose_estimation.py` is a separate approach that turns head angles from MediaPipe Face Mesh and `solvePnP` into a smoothed cheating probability with a live Matplotlib plot. |
 | `src/` | `cheat_detection.py`, the latest version: face verification plus scoring, where a detected phone or book, or a face below or beside the frame center, raises the score to its maximum. Output is shown in an OpenCV window. |
 | `requirements.txt` | Python packages imported across all scripts, without pinned versions. |
 | `README.md` | This file. |
