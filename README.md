@@ -2,7 +2,7 @@
 
 This repository holds Python prototypes that estimate how likely it is that the person in front of a webcam is cheating.
 
-<sub>ARCHIVED EXPERIMENT · 2025 · PYTHON · OPENCV · TENSORFLOW</sub>
+<sub>ARCHIVED EXPERIMENT · 2024 · PYTHON · OPENCV · TENSORFLOW</sub>
 
 ## Overview
 
