@@ -2,18 +2,18 @@
 
 Python prototypes for flagging possible cheating from a live webcam feed.
 
-<sub>ARCHIVED EXPERIMENT · 2024 · PYTHON · OPENCV · TENSORFLOW</sub>
+<sub>ARCHIVED EXPERIMENT · 2025 · PYTHON · OPENCV · TENSORFLOW</sub>
 
 ## Overview
 
-Most scripts try to flag possible cheating in a live webcam feed by combining several visual cues. An SSD MobileNet V2 detector from TensorFlow Hub counts people and finds phones or books, and an OpenCV Haar cascade checks face position. The dlib facial landmarks compare lip distance with a closed-lips calibration, and later versions score frames only while DeepFace matches the person to a reference image. Two scripts differ: `03_face_verification.py` only checks identity, and `05_head_pose_estimation.py` uses head angles from MediaPipe Face Mesh alone.
+Most scripts try to flag possible cheating in a live webcam feed by combining several visual cues. In the final version, a detected phone or book, or a face below or beside the frame center, raises the score to its maximum. An SSD MobileNet V2 detector from TensorFlow Hub counts people and finds phones or books, and an OpenCV Haar cascade checks face position. The dlib facial landmarks compare lip distance with a closed-lips calibration, and later versions score frames only while DeepFace matches the person to a reference image. Two scripts differ: `03_face_verification.py` only checks identity, and `05_head_pose_estimation.py` uses head angles from MediaPipe Face Mesh alone.
 
 ## Contents
 
 | Path | Description |
 | --- | --- |
-| `src/` | `cheat_detection.py`, the final version. It scores only while the face matches. A detected phone or book raises the score to its maximum. So does a face below or beside the frame center. Output is shown in an OpenCV window. |
-| `experiments/` | Five earlier scripts, numbered in commit order. `01_first_attempt.py` and `02_second_attempt.py` combine object detection, face position, and lip distance into a cheating percentage. The second only adds quieter TensorFlow logging. `03_face_verification.py` checks webcam frames against a reference image with DeepFace every 30 frames and computes no score. `04_face_verification_with_scoring.py` computes the score only while the face matches. `05_head_pose_estimation.py` is a separate approach. It turns head angles from MediaPipe Face Mesh and `solvePnP` into an accumulating cheating probability with a live Matplotlib plot. |
+| `src/` | `cheat_detection.py`, the final version: it scores frames only while the face matches the reference image, and shows the result in an OpenCV window. |
+| `experiments/` | Five earlier attempts in commit order: object detection with face and lip cues (01, 02), identity checks with DeepFace (03, 04), and a separate head pose approach with MediaPipe Face Mesh (05). |
 | `requirements.txt` | Third-party packages imported by the scripts, unpinned. |
 
 ## Usage
@@ -37,6 +37,6 @@ python experiments/05_head_pose_estimation.py
 
 ## Notes
 
-Archived experiment kept for reference. No evaluation data or results are included, and every script except 05 points to local model or image files that are not in the repository. Scripts 01, 02, and 04 share most of their code with `src/cheat_detection.py`, and every script except 03 uses hand-set weights and thresholds.
+Archived experiment kept for reference. No evaluation data or results are included, and every script except 05 points to local model or image files that are not in the repository, through hardcoded absolute Windows paths. Scripts 01, 02, and 04 share most of their code with `src/cheat_detection.py`, and every script except 03 uses hand-set weights and thresholds.
 
 <sub>This repository follows the [Repository Standard](https://github.com/Atadbz/Atadbz/blob/main/REPOSITORY_STANDARD.md).</sub>
