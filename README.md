@@ -6,7 +6,7 @@ Python prototypes for flagging possible cheating from a live webcam feed.
 
 ## Overview
 
-Most scripts try to flag possible cheating in a live webcam feed by combining several visual cues. In the final version, a detected phone or book, or a face below or beside the frame center, raises the score to its maximum. An SSD MobileNet V2 detector from TensorFlow Hub counts people and finds phones or books, and an OpenCV Haar cascade checks face position. The dlib facial landmarks compare lip distance with a closed-lips calibration, and later versions score frames only while DeepFace matches the person to a reference image. Two scripts differ: `03_face_verification.py` only checks identity, and `05_head_pose_estimation.py` uses head angles from MediaPipe Face Mesh alone.
+Most scripts try to flag possible cheating in a live webcam feed by combining several visual cues. An SSD MobileNet V2 detector from TensorFlow Hub counts people and finds phones or books, and an OpenCV Haar cascade checks face position. The dlib facial landmarks compare lip distance with a closed-lips calibration, and later versions score frames only while DeepFace matches the person to a reference image. Two scripts differ: `03_face_verification.py` only checks identity, and `05_head_pose_estimation.py` uses head angles from MediaPipe Face Mesh alone.
 
 ## Contents
 
