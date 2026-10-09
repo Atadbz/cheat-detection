@@ -1,0 +1,11 @@
+deepface
+dlib
+ipython
+matplotlib
+mediapipe
+numpy
+opencv-python
+pillow
+scipy
+tensorflow
+tensorflow-hub
